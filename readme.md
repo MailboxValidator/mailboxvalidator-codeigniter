@@ -1,4 +1,4 @@
-# MailboxValidator CakePHP Email Validation Package
+# MailboxValidator CodeIgniter Email Validation Package
 
 MailboxValidator CodeIgniter Email Validation Package provides an easy way to call the MailboxValidator API which validates if an email address is valid.
 
