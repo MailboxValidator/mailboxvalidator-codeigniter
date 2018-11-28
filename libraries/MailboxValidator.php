@@ -13,6 +13,7 @@ class MailboxValidator {
 	public function get_single_result($email) {
 		if ($email != ''){
 			return $this->mbv->ValidateEmail($email);
+		}
 	}
 	
 	public function is_email_free($email) {
