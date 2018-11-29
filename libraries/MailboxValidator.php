@@ -20,10 +20,10 @@ class MailboxValidator {
 		if ($email != ''){
 			$result = $this->mbv->FreeEmail($email);
 			if ($result != false) {
-				if ($result->is_free == 'False') {
-					return true;
-				} else {
+				if ($result->is_free == 'True') {
 					return false;
+				} else {
+					return true;
 				}
 			} else {
 				return false;
