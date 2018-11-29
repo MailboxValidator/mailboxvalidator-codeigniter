@@ -40,16 +40,16 @@ class MY_Form_validation extends CI_Form_validation {
 	public function __construct(){
     
         $this->CI = &get_instance();
-		$this->CI->load->library('MailboxValidator_lib1');
-		$this->CI->MailboxValidator_lib1 = new MailboxValidator_lib1();
+		$this->CI->load->library('MailboxValidator');
+		$this->CI->MailboxValidator = new MailboxValidator();
 	}
 
     public function disposable($email) {
-		return $this->CI->MailboxValidator_lib1->get_disposable_result($email);
+		return $this->CI->MailboxValidator->get_disposable_result($email);
 	}
 
     public function free($email) {
-		return $this->CI->MailboxValidator_lib1->get_free_result($email);
+		return $this->CI->MailboxValidator->get_free_result($email);
 	}
 
 }
