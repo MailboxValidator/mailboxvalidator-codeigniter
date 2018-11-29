@@ -21,6 +21,13 @@ After you get your API key, open your ``application/config/config.php`` and add 
 $config['mbv_api_key'] = 'PASTE_YOUR_API_KEY_HERE';
 ```
 
+You can also set you api key in controller during calling library. Just do like this:
+
+```php
+$params = array('mbv_api_key' => 'PASTE_YOUR_API_KEY_HERE');
+$this->CI->load->library('mailboxvalidator',$params);
+```
+
 
 
 ## Methods
