@@ -16,6 +16,7 @@ class Mailboxvalidator {
 		} else {
 			$this->mbv = new \MailboxValidator\SingleValidation($CI->config->item('mbv_api_key'));
 		}
+		log_message('debug', "Mailboxvalidator Class Initialized.");
 	}
 
 	public function get_single_result($email) {
