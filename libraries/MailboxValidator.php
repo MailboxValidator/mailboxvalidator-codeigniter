@@ -5,9 +5,15 @@ require_once('MailboxValidator/SingleValidation.php');
 
 class MailboxValidator {
 
-	public function __construct() {
+	protected $mbv;
+	
+	public function __construct($key = 0) {
 		$CI = &get_instance();
-		$this->mbv = new \MailboxValidator\SingleValidation($CI->config->item('mbv_api_key'));
+		if (($key != '') && ($key != 0)) {
+			$this->mbv = new \MailboxValidator\SingleValidation($key);
+		} else {
+			$this->mbv = new \MailboxValidator\SingleValidation($CI->config->item('mbv_api_key'));
+		}
 	}
 
 	public function get_single_result($email) {
