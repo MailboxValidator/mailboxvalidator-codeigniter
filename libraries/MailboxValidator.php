@@ -3,12 +3,13 @@
 
 require_once('MailboxValidator/SingleValidation.php');
 
-class MailboxValidator {
+class Mailboxvalidator {
 
 	protected $mbv;
 	
 	public function __construct($key = 0) {
 		$CI = &get_instance();
+
 		if (($key != '') && ($key != 0)) {
 			$this->mbv = new \MailboxValidator\SingleValidation($key);
 		} else {
