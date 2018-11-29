@@ -23,6 +23,18 @@ $config['mbv_api_key'] = 'PASTE_YOUR_API_KEY_HERE';
 
 
 
+## Methods
+
+Below are the methods supported in this library.
+
+| Method Name         | Description                                                  |
+| ------------------- | ------------------------------------------------------------ |
+| get_single_result   | Return the validation result of an email address. Please visit [MailboxValidator](https://www.mailboxvalidator.com/api-single-validation) for the list of the response parameters. |
+| is_email_free       | Check whether the email address is belongs to a free email provider or not. Return Values: True, False |
+| is_email_disposable | Check whether the email address is belongs to a disposable email provider or not. Return Values: True, False |
+
+
+
 ## Usage
 
 ### Form Validation
@@ -40,16 +52,15 @@ class MY_Form_validation extends CI_Form_validation {
 	public function __construct(){
     
         $this->CI = &get_instance();
-		$this->CI->load->library('MailboxValidator');
-		$this->CI->MailboxValidator = new MailboxValidator();
+		$this->CI->load->library('Mailboxvalidator');
 	}
 
     public function disposable($email) {
-		return $this->CI->MailboxValidator->get_disposable_result($email);
+		return $this->CI->Mailboxvalidator->is_email_disposable($email);
 	}
 
     public function free($email) {
-		return $this->CI->MailboxValidator->get_free_result($email);
+		return $this->CI->Mailboxvalidator->is_email_free($email);
 	}
 
 }
@@ -65,6 +76,25 @@ $this->form_validation->set_rules('email', 'Email', 'required|disposable', array
 
 Noted that you will be required to add a custom error message for it. Now you can open your form and try to enter a disposable email address to see the outcome. The form should return the error message for the disposable email.
 
+### Email Validation
+
+To use this library to get validation result for an email address, firstly load the library in your controller like this:
+```php
+$this->load->library('mailboxvalidator');
+```
+After that, you can get the validation result for the email address like this:
+```php
+$result = $this->mailboxvalidator->get_single_result('test@example.com');
+```
+To pass the result to the view, just simply add the $result to your view loader like this:
+```php
+$this->load->view('YOUR_VIEW_NAME',$result);
+```
+And then in your view file, call the validation results. For example:
+```php
+echo $email_address;
+```
+You can refer the full list of response parameters available at [here](https://www.mailboxvalidator.com/api-single-validation).
 
 
 
