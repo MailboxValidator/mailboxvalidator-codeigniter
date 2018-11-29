@@ -7,10 +7,11 @@ class Mailboxvalidator {
 
 	protected $mbv;
 	
-	public function __construct($key = 0) {
+	public function __construct($params = '') {
 		$CI = &get_instance();
+		$key = $params['mbv_api_key'];
 
-		if (($key != '') && ($key != 0)) {
+		if ($key != '') {
 			$this->mbv = new \MailboxValidator\SingleValidation($key);
 		} else {
 			$this->mbv = new \MailboxValidator\SingleValidation($CI->config->item('mbv_api_key'));
@@ -26,13 +27,14 @@ class Mailboxvalidator {
 	public function is_email_free($email) {
 		if ($email != ''){
 			$result = $this->mbv->FreeEmail($email);
-			if ($result != false) {
+			if ($result != false && $result->error_code == '') {
 				if ($result->is_free == 'True') {
 					return false;
 				} else {
 					return true;
 				}
 			} else {
+				log_message('error', 'MBV API Error: ' . $result->error_code .'-' . $result->error_message);
 				return false;
 			}
 		} else {
@@ -43,13 +45,14 @@ class Mailboxvalidator {
 	public function is_email_disposable($email) {
 		if ($email != ''){
 			$result = $this->mbv->DisposableEmail($email);
-			if ($result != false) {
+			if ($result != false && $result->error_code == '') {
 				if ($result->is_disposable == 'True') {
 					return false;
 				} else {
 					return true;
 				}
 			} else {
+				log_message('error', 'MBV API Error: ' . $result->error_code .'-' . $result->error_message);
 				return false;
 			}
 		} else {
