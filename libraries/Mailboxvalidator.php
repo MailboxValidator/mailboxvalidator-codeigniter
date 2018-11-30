@@ -30,9 +30,9 @@ class Mailboxvalidator {
 			$result = $this->mbv->FreeEmail($email);
 			if ($result != false && $result->error_code == '') {
 				if ($result->is_free == 'True') {
-					return false;
-				} else {
 					return true;
+				} else {
+					return false;
 				}
 			} else {
 				log_message('error', 'MBV API Error: ' . $result->error_code .'-' . $result->error_message);
@@ -48,9 +48,9 @@ class Mailboxvalidator {
 			$result = $this->mbv->DisposableEmail($email);
 			if ($result != false && $result->error_code == '') {
 				if ($result->is_disposable == 'True') {
-					return false;
-				} else {
 					return true;
+				} else {
+					return false;
 				}
 			} else {
 				log_message('error', 'MBV API Error: ' . $result->error_code .'-' . $result->error_message);

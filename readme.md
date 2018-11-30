@@ -63,11 +63,21 @@ class MY_Form_validation extends CI_Form_validation {
 	}
 
     public function disposable($email) {
-		return $this->CI->mailboxvalidator->is_email_disposable($email);
+		if ($this->CI->mailboxvalidator1->is_email_disposable($email) == true) {
+			// If is_email_disposable return true, means the email is disposable email
+			return false;
+		} else {
+			return true;
+		}
 	}
 
     public function free($email) {
-		return $this->CI->mailboxvalidator->is_email_free($email);
+		if ($this->CI->mailboxvalidator1->is_email_free($email) == true) {
+			// If is_email_free return true, means the email is free email
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 }
