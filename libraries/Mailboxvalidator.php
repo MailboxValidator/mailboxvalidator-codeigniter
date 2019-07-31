@@ -9,9 +9,9 @@ class Mailboxvalidator {
 	
 	public function __construct($params = '') {
 		$CI = &get_instance();
-		$key = $params['mbv_api_key'];
 
-		if ($key != '') {
+		if ($params != '') {
+			$key = $params['mbv_api_key'];
 			$this->mbv = new \MailboxValidator\SingleValidation($key);
 		} else {
 			$this->mbv = new \MailboxValidator\SingleValidation($CI->config->item('mbv_api_key'));
