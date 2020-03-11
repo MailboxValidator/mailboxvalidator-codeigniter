@@ -16,7 +16,7 @@ class SingleValidation {
 	
 	public function ValidateEmail($email) {
 		try{
-			$params = [ 'email' => $email, 'key' => $this->apikey, 'format' => 'json' ];
+			$params = [ 'email' => $email, 'key' => $this->apikey, 'format' => 'json', 'source' => 'codeigniter' ];
 			$params2 = [];
 			foreach($params as $key => $value) {
 				$params2[] = $key . '=' . rawurlencode($value);
@@ -39,7 +39,7 @@ class SingleValidation {
 	
 	public function DisposableEmail($email) {
 		try{
-			$params = [ 'email' => $email, 'key' => $this->apikey, 'format' => 'json', 'source' => 'codeigniter'  ];
+			$params = [ 'email' => $email, 'key' => $this->apikey, 'format' => 'json', 'source' => 'codeigniter' ];
 			$params2 = [];
 			foreach($params as $key => $value) {
 				$params2[] = $key . '=' . rawurlencode($value);
@@ -62,7 +62,7 @@ class SingleValidation {
 	
 	public function FreeEmail($email) {
 		try{
-			$params = [ 'email' => $email, 'key' => $this->apikey, 'format' => 'json', 'source' => 'codeigniter'  ];
+			$params = [ 'email' => $email, 'key' => $this->apikey, 'format' => 'json', 'source' => 'codeigniter' ];
 			$params2 = [];
 			foreach($params as $key => $value) {
 				$params2[] = $key . '=' . rawurlencode($value);
