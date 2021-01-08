@@ -19,6 +19,8 @@ Upload the ``libraries`` folder to your CodeIgniter ``application`` folder
 
 ## Dependencies
 
+This package will only work with CodeIgniter 3. For CodeIgniter 4, you can get it from [here](https://github.com/MailboxValidator/mailboxvalidator-codeigniter4).
+
 An API key is required for this module to function.
 
 Go to https://www.mailboxvalidator.com/plans#api to sign up for FREE API plan and you'll be given an API key.
@@ -39,7 +41,7 @@ $this->CI->load->library('mailboxvalidator',$params);
 
 ## Functions
 
-### get_single_result (email_address)
+### getSingleResult(email_address)
 
 Performs email validation on the supplied email address.
 
@@ -70,13 +72,13 @@ Performs email validation on the supplied email address.
 
 
 
-#### is_email_disposable (email_address)
+#### isDisposableEmail(email_address)
 
 Check whether the email address is belongs to a disposable email provider or not. Return Values: True, False
 
 
 
-#### is_email_free (email_address)
+#### isFreeEmail(email_address)
 
 Check whether the email address is belongs to a free email provider or not. Return Values: True, False
 
@@ -103,7 +105,7 @@ class MY_Form_validation extends CI_Form_validation {
 	}
 
     public function disposable($email) {
-		if ($this->CI->mailboxvalidator1->is_email_disposable($email) == true) {
+		if ($this->CI->mailboxvalidator->isDisposableEmail($email) == true) {
 			// If is_email_disposable return true, means the email is disposable email
 			return false;
 		} else {
@@ -112,7 +114,7 @@ class MY_Form_validation extends CI_Form_validation {
 	}
 
     public function free($email) {
-		if ($this->CI->mailboxvalidator1->is_email_free($email) == true) {
+		if ($this->CI->mailboxvalidator->isFreeEmail($email) == true) {
 			// If is_email_free return true, means the email is free email
 			return false;
 		} else {
@@ -125,10 +127,39 @@ class MY_Form_validation extends CI_Form_validation {
 ?>
 ```
 
-Next, in your form controller, add the function name into the ``set_rules`` array. For example, if you want to use the ``disposable`` function to validate email, just add the ``disposable`` into the ``set_rules`` array like this:
+Next, in your form controller, add the function name into the ``set_rules`` array. For example, if you want to use the ``disposable`` function to validate email, just add the ``disposable`` into the ``set_rules`` array. A sample code is displayed at below:
 
 ```php
-$this->form_validation->set_rules('email', 'Email', 'required|disposable', array('disposable' => 'A disposable email address is detected.'));
+<?php
+class Register extends CI_Controller
+{
+    public function __construct()
+    {
+         parent::__construct();
+         $this->load->helper('form');
+         $this->load->helper('url');
+         $this->load->library('form_validation');
+    }
+    
+    public function index()
+    {
+        $data['username'] = $this->input->post('username');
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|disposable', array('disposable' => 'A disposable email address is detected.'));
+        if ($this->form_validation->run() == FALSE)
+        {
+                $this->load->view('register');
+        }
+        else
+        {
+                $this->load->view('sucess',$data);
+        }
+    }
+    
+    
+}
 ```
 
 Noted that you will be required to add a custom error message for it. Now you can open your form and try to enter a disposable email address to see the outcome. The form should return the error message for the disposable email.
@@ -141,7 +172,7 @@ $this->load->library('mailboxvalidator');
 ```
 After that, you can get the validation result for the email address like this:
 ```php
-$result = $this->mailboxvalidator->get_single_result('test@example.com');
+$result = $this->mailboxvalidator->getSingleResult('test@example.com');
 ```
 To pass the result to the view, just simply add the $result to your view loader like this:
 ```php
@@ -169,4 +200,4 @@ You can refer the full list of response parameters at above table.
 
 ## Copyright
 
-Copyright (C) 2018-2020 by MailboxValidator.com, support@mailboxvalidator.com
+Copyright (C) 2018-2021 by MailboxValidator.com, support@mailboxvalidator.com
