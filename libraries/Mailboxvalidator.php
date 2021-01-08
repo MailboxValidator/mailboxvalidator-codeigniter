@@ -19,7 +19,7 @@ class Mailboxvalidator {
 		log_message('debug', "Mailboxvalidator Class Initialized.");
 	}
 
-	public function get_single_result($email) {
+	public function getSingleResult($email) {
 		if ($email != ''){
 			return $this->mbv->validateEmail($email);
 		}
@@ -27,7 +27,7 @@ class Mailboxvalidator {
 	
 	public function isFreeEmail($email) {
 		if ($email != ''){
-			$result = $this->mbv->FreeEmail($email);
+			$result = $this->mbv->isFreeEmail($email);
 			if ($result != false && $result->error_code == '') {
 				if ($result->is_free == 'True') {
 					return true;
@@ -43,7 +43,7 @@ class Mailboxvalidator {
 		}
 	}
 
-	public function is_email_disposable($email) {
+	public function isDisposableEmail($email) {
 		if ($email != ''){
 			$result = $this->mbv->isDisposableEmail($email);
 			if ($result != false && $result->error_code == '') {
