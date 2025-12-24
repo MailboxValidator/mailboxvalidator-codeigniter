@@ -200,4 +200,4 @@ You can refer the full list of response parameters at above table.
 
 ## Copyright
 
-Copyright (C) 2018-2024 by MailboxValidator.com, support@mailboxvalidator.com
+Copyright (C) 2018-2026 by MailboxValidator.com, support@mailboxvalidator.com
